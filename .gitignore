@@ -1,0 +1,4 @@
+.idea
+App/Config/settings.php
+logs/*
+vendor

@@ -1,0 +1,21 @@
+{% extends "page.twig" %}
+
+{% block title %}FabianGoe Blog Homepage{% endblock %}
+
+{% block content %}
+
+    <div class="blogs">
+        {% for blog in blogs %}
+            <section class="blog">
+                <header>
+                    <h2>{{ blog.getTitle() }}</h2>
+                    <p class="meta">{{ blog.getDate.format('F jS, Y H:i') }}</p>
+                    <p class="intro">{{ blog.getIntroduction()|nl2br }}</p>
+
+                    <a class="pure-button" href="{{ path_for('blog_page', {'slug': blog.getSlug}) }}">Continue reading</a>
+                </header>
+            </section>
+        {% endfor %}
+    </div>
+
+{% endblock %}

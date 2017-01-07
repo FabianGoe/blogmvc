@@ -1,0 +1,14 @@
+{% extends "page.twig" %}
+
+{% block title %}{{ blog.getTitle() }} - FabianGoe Blog{% endblock %}
+
+{% block content %}
+    <div class="blog">
+        <h2>{{ blog.getTitle() }}</h2>
+        <p class="meta">{{ blog.getDate.format('F jS, Y H:i') }}</p>
+        <p class="intro">{{ blog.getIntroduction()|nl2br }}</p>
+        <p>{{ blog.getContent()|nl2br }}</p>
+
+        <a class="pure-button" href="{{ path_for('homepage') }}">Go back</a>
+    </div>
+{% endblock %}

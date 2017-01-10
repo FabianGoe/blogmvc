@@ -69,6 +69,22 @@ class Blog implements BaseModel
     }
 
     /**
+     * @inheritdoc
+     */
+    public function validate()
+    {
+        if (empty($this->db_title)) {
+            throw new \InvalidArgumentException('Title cannot be empty');
+        }
+
+        if (empty($this->db_slug)) {
+            throw new \InvalidArgumentException('Slug cannot be empty');
+        }
+
+        return true;
+    }
+
+    /**
      * @param int $id
      *
      * @throws \InvalidArgumentException

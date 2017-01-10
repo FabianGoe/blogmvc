@@ -7,6 +7,52 @@ use FabianGO\Models\Blog;
 class BlogFactory extends BaseFactory
 {
     /**
+     * Inserts a blog into the database
+     *
+     * @param array $params
+     *
+     * @return Blog
+     */
+    public function create(array $params)
+    {
+        if (isset($params['id'])) {
+            throw new \InvalidArgumentException('Cannot create blog with id supplied');
+        }
+
+        $blog = new Blog($params);
+        $blog->validate();
+
+        $stmt = $this->pdo->prepare("INSERT INTO `blogs` (
+                                          `title`,
+                                          `slug`,
+                                          `introduction`,
+                                          `content`,
+                                          `date`) 
+                                      values(
+                                          :title, 
+                                          :slug,
+                                          :introduction,
+                                          :content,
+                                          :date_stamp);");
+
+        $pdoParams = [
+            'title' => $blog->getTitle(),
+            'slug' => $blog->getSlug(),
+            'introduction' => $blog->getIntroduction(),
+            'content' => $blog->getContent(),
+            'date_stamp' => ($blog->getDate() !== null) ? $blog->getDate()->getTimestamp() : null
+        ];
+
+        $stmt->execute($pdoParams);
+
+        $id = $this->pdo->lastInsertId();
+
+        $blog->setId((int)$id);
+
+        return $blog;
+    }
+
+    /**
      * Retrieves one blog using its slug
      *
      * @param string $slug

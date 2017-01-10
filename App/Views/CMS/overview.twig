@@ -6,7 +6,15 @@
     <div class="cms">
         <h2>CMS overview</h2>
 
-        {# create button #}
+
+        {% for msg in flash('success') %}
+            <div class="message success">
+                <span>Error: </span> {{ msg }}
+            </div>
+        {% endfor %}
+
+        <a class="pure-button" href="{{ path_for('cms_blog_create') }}">Create new blog</a>
+        <br/><br/>
 
         <table class="pure-table pure-table-horizontal">
             <thead>
@@ -20,7 +28,7 @@
             {% for blog in blogs %}
                 <tr class="blog">
                     <td class="title">{{ blog.getTitle() }}</td>
-                    {#<td><a href="{{ path_for('cms_blog_page', {'slug': blog.getSlug}) }}">{{ blog.getTitle() }}</a></td>#}
+                    {#<td class="title"><a href="{{ path_for('cms_blog_edit', slug: blog.getSlug()) }}">{{ blog.getTitle() }}</a></td>#}
                     <td>{{ blog.getDate.format('F jS, Y H:i') }}</td>
                 </tr>
             {% endfor %}

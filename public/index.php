@@ -15,5 +15,7 @@ require_once(__DIR__.'/../App/dependencies.php');
 
 require_once(__DIR__.'/../App/routes.php');
 
+require_once(__DIR__.'/../App/middleware.php');
+
 $app->run();
 

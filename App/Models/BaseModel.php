@@ -17,4 +17,11 @@ interface BaseModel
      * @return array
      */
     function toArray();
+
+    /**
+     * Checks specific fields before database entry
+     *
+     * @throws \InvalidArgumentException
+     */
+    function validate();
 }

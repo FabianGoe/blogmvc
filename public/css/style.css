@@ -108,3 +108,25 @@ p.intro {
 .cms table .title {
     width: 75%;
 }
+
+.message {
+    color:#555;
+    border-radius:10px;
+    font-family:Tahoma,Geneva,Arial,sans-serif;
+    padding:10px 10px 10px 36px;
+    margin:10px;
+}
+
+.message span {
+    font-weight:bold;
+    text-transform:uppercase;
+}
+
+.message.error {
+    background:#ffecec;
+    border:1px solid #f5aca6;
+}
+.message.success {
+    background:#e9ffd9;
+    border:1px solid #a6ca8a;
+}

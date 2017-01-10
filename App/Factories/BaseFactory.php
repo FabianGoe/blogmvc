@@ -27,4 +27,11 @@ abstract class BaseFactory
         $this->logger = $container->get('logger');
         $this->pdo = $container->get('pdo');
     }
+
+    /**
+     * Required create method
+     *
+     * @param array $params
+     */
+    abstract function create(array $params);
 }

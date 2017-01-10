@@ -16,6 +16,9 @@ class BaseController
     /** @var null|\PDO */
     protected $pdo = null;
 
+    /** @var \Slim\Flash\Messages|null  */
+    protected $flash = null;
+
     /** @var null|\Slim\Views\Twig */
     protected $view = null;
 
@@ -32,6 +35,7 @@ class BaseController
         $this->settings = $container->get('settings');
         $this->logger = $container->get('logger');
         $this->pdo = $container->get('pdo');
+        $this->flash = $container->get('flash');
         $this->view = $container->get('view');
     }
 }

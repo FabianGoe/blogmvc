@@ -41,6 +41,15 @@ $container['pdo'] = function($container) {
 };
 
 /**
+ * Adds flash messaging for delayed messaging across subsequent requests
+ *
+ * @return \Slim\Flash\Messages
+ */
+$container['flash'] = function () {
+    return new \Slim\Flash\Messages();
+};
+
+/**
  * Adds Twig for template rendering
  *
  * @param \Slim\Container $container
@@ -51,6 +60,7 @@ $container['view'] = function($container) {
     $view = new \Slim\Views\Twig(__DIR__.'/Views');
     $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
     $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
+    $view->addExtension(new Knlv\Slim\Views\TwigMessages($container->get('flash')));
 
     return $view;
 };

@@ -1,0 +1,30 @@
+{% extends "page.twig" %}
+
+{% block title %}FabianGoe Blog CMS{% endblock %}
+
+{% block content %}
+    <div class="cms">
+        <h2>CMS overview</h2>
+
+        {# create button #}
+
+        <table class="pure-table pure-table-horizontal">
+            <thead>
+            <tr>
+                <td>Title</td>
+                <td>Date</td>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for blog in blogs %}
+                <tr class="blog">
+                    <td class="title">{{ blog.getTitle() }}</td>
+                    {#<td><a href="{{ path_for('cms_blog_page', {'slug': blog.getSlug}) }}">{{ blog.getTitle() }}</a></td>#}
+                    <td>{{ blog.getDate.format('F jS, Y H:i') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -48,4 +48,22 @@ class BlogFactory extends BaseFactory
 
         return $blogs;
     }
+
+    /**
+     * Retrieve all blogs in database ordered by id (descending)
+     *
+     * @return Blog[]
+     */
+    public function getAll()
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM `blogs` ORDER BY `id` DESC");
+        $stmt->execute();
+
+        $blogs = [];
+        while ($row = $stmt->fetch()) {
+            $blogs[] = new Blog($row);
+        }
+
+        return $blogs;
+    }
 }

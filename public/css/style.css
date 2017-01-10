@@ -98,3 +98,13 @@ p.intro {
         bottom: 0;
     }
 }
+
+   /* CMS */
+
+.cms table thead {
+    font-weight: bold;
+}
+
+.cms table .title {
+    width: 75%;
+}

@@ -3,7 +3,7 @@
 namespace FabianGO\Models;
 
 
-class Blog extends BaseModel
+class Blog implements BaseModel
 {
     /** @var null|int */
     private $db_id = null;

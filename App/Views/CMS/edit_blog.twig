@@ -1,0 +1,69 @@
+{% extends "page.twig" %}
+
+{% block title %}FabianGoe Blog CMS - edit blog{% endblock %}
+
+{% block content %}
+    <div class="cms">
+        <h2>Edit: {{ blog.getTitle() }}</h2>
+
+        {% if error is not empty %}
+            <div class="message error">
+                <span>Error: </span> {{ error }}
+            </div>
+        {% endif %}
+
+        {% if user_input['title'] is defined %}
+            {% set title = user_input['title'] %}
+        {% else %}
+            {% set title = blog.getTitle() %}
+        {% endif %}
+
+        {% if user_input['slug'] is defined %}
+            {% set slug = user_input['slug'] %}
+        {% else %}
+            {% set slug = blog.getSlug() %}
+        {% endif %}
+
+        {% if user_input['introduction'] is defined %}
+            {% set introduction = user_input['introduction'] %}
+        {% else %}
+            {% set introduction = blog.getIntroduction() %}
+        {% endif %}
+
+        {% if user_input['content'] is defined %}
+            {% set content = user_input['content'] %}
+        {% else %}
+            {% set content = blog.getContent() %}
+        {% endif %}
+
+
+        <form class="pure-form pure-form-aligned" method="post" action="{{ path_for('cms_blog_edit_handle', {slug: blog.getSlug()}) }}">
+            <fieldset>
+                <div class="pure-control-group">
+                    <label for="title">Title</label>
+                    <input id="title" name="title" type="text" placeholder="Example title" value="{{ title }}">
+                </div>
+                <div class="pure-control-group">
+                    <label for="slug">URL friendly title</label>
+                    <input id="slug" name="slug" type="text" placeholder="example_title" value="{{ slug }}">
+                </div>
+                <div class="pure-control-group">
+                    <label for="introduction">Introduction text</label>
+                    <textarea id="introduction" name="introduction" rows="4" cols="50">{{ introduction }}</textarea>
+                </div>
+                <div class="pure-control-group">
+                    <label for="content">Content</label>
+                    <textarea id="content" name="content" rows="4" cols="50">{{ content }}</textarea>
+                </div>
+
+                <div class="pure-controls">
+                    <input type="hidden" name="id" value="{{ blog.getId() }}"/>
+
+                    <button type="submit" value="Submit" class="pure-button pure-button-primary">Edit blog</button>
+                    <a class="pure-button" href="{{ path_for('cms_overview') }}">Back</a>
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+{% endblock %}

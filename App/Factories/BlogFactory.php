@@ -28,7 +28,7 @@ class BlogFactory extends BaseFactory
                                           `introduction`,
                                           `content`,
                                           `date`) 
-                                      values(
+                                      VALUES(
                                           :title, 
                                           :slug,
                                           :introduction,
@@ -40,7 +40,7 @@ class BlogFactory extends BaseFactory
             'slug' => $blog->getSlug(),
             'introduction' => $blog->getIntroduction(),
             'content' => $blog->getContent(),
-            'date_stamp' => ($blog->getDate() !== null) ? $blog->getDate()->getTimestamp() : null
+            'date_stamp' => ($blog->getDate() !== null) ? $blog->getDate()->format('Y-m-d H:i:s') : null
         ];
 
         $stmt->execute($pdoParams);
@@ -48,6 +48,41 @@ class BlogFactory extends BaseFactory
         $id = $this->pdo->lastInsertId();
 
         $blog->setId((int)$id);
+
+        return $blog;
+    }
+
+    /**
+     * Edits an existing block
+     *
+     * @param Blog $blog
+     * @param array $params
+     *
+     * @return Blog
+     */
+    public function edit($blog, array $params)
+    {
+        $blog->initialize($params);
+        $blog->validate();
+
+        $stmt = $this->pdo->prepare("UPDATE `blogs` 
+                                      SET `title` = :title,
+                                          `slug` = :slug,
+                                          `introduction` = :introduction,
+                                          `content` = :content,
+                                          `date` = :date_stamp
+                                    WHERE `id` = :id");
+
+        $pdoParams = [
+            'id' => $blog->getId(),
+            'title' => $blog->getTitle(),
+            'slug' => $blog->getSlug(),
+            'introduction' => $blog->getIntroduction(),
+            'content' => $blog->getContent(),
+            'date_stamp' => ($blog->getDate() !== null) ? $blog->getDate()->format('Y-m-d H:i:s') : null
+        ];
+
+        $stmt->execute($pdoParams);
 
         return $blog;
     }

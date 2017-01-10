@@ -27,8 +27,7 @@
             <tbody>
             {% for blog in blogs %}
                 <tr class="blog">
-                    <td class="title">{{ blog.getTitle() }}</td>
-                    {#<td class="title"><a href="{{ path_for('cms_blog_edit', slug: blog.getSlug()) }}">{{ blog.getTitle() }}</a></td>#}
+                    <td class="title"><a href="{{ path_for('cms_blog_edit', {slug: blog.getSlug()}) }}">{{ blog.getTitle() }}</a></td>
                     <td>{{ blog.getDate.format('F jS, Y H:i') }}</td>
                 </tr>
             {% endfor %}

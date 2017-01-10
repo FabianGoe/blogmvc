@@ -6,11 +6,11 @@
     <div class="cms">
         <h2>Create blog</h2>
 
-        {% for msg in flash('error') %}
+        {% if error is not empty %}
             <div class="message error">
-                <span>Error: </span> {{ msg }}
+                <span>Error: </span> {{ error }}
             </div>
-        {% endfor %}
+        {% endif %}
 
         <form class="pure-form pure-form-aligned" method="post" action="{{ path_for('cms_blog_create_handle') }}">
             <fieldset>

@@ -34,4 +34,12 @@ abstract class BaseFactory
      * @param array $params
      */
     abstract function create(array $params);
+
+    /**
+     * Required edit method
+     *
+     * @param $blog
+     * @param array $params
+     */
+    abstract function edit($blog, array $params);
 }
